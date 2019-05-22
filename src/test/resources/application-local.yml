@@ -1,0 +1,74 @@
+server:
+  port: 8000
+
+roses:
+  log:
+    kafka: true
+    trace: true
+    level: error,info
+
+jwt:
+  secret: abcdefg
+  expiration: 604800
+
+spring:
+  http:
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
+  aop:
+    proxy-target-class: true
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 30MB
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    listener:
+      type: BATCH
+    producer:
+      batchSize: 500
+      keySerializer: org.apache.kafka.common.serialization.StringSerializer
+      valueSerializer: cn.stylefeng.roses.kernel.logger.serizlizer.FastjsonKafkaSerializer
+
+zuul:
+  add-host-header: true
+  routes:
+    roses-system: /roses-system/**
+    api-gate:
+      path: /doorAction/**
+      url: forward:/doorAction  #以/authAction开头的请求转发到本网关的控制器
+  retryable: false              #转发重试关闭
+  sensitive-headers:
+
+feign:
+  hystrix:
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 300  #创建连接的超时时间 单位：毫秒
+        readTimeout: 3000    #处理请求的超时时间 单位：毫秒
+        errorDecoder: cn.stylefeng.roses.core.feign.RosesFeignErrorDecoder
+        requestInterceptors:
+        - cn.stylefeng.roses.gateway.core.feign.ZuulFeignHeaderProcessInterceptor
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 2000
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 20   #服务过期时间配置,超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除(默认90秒)
+    lease-renewal-interval-in-seconds: 5       #服务刷新时间配置，每隔这个时间会主动心跳一次(默认30秒)
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+    registry-fetch-interval-seconds: 10  #重新刷新服务地址的时间
