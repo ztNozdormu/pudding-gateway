@@ -4,16 +4,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * 网关服务
  *
- * @author fengshuonan
- * ,WebAutoConfiguration.class
- * @Date 2017/11/10 上午11:24
+ * @author real earth
+ * WebAutoConfiguration.class
+ * @Date 2019/05/23 上午11:24
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-//@EnableFeignClients(basePackages = "cn.stylefeng.roses.gateway.modular.consumer")
+@EnableFeignClients(basePackages = "com.mohism.pudding.gateway.modular.consumer")
 @EnableDiscoveryClient
 public class PuddingGatewayApplication {
 

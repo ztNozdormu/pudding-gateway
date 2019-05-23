@@ -52,7 +52,6 @@ public class ContextConfig {
 //        @Override
 //        public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
 ////            RequestContext currentContext = RequestContext.getCurrentContext();
-//            webRequest.g
 //            Throwable throwable = currentContext.getThrowable();
 ////            if(throwable instanceof wEx)
 ////            if (throwable instanceof ZuulException) {

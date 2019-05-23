@@ -9,6 +9,9 @@ spring:
     nacos:
       discovery:
        server-addr: 47.107.170.59:8848
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
 #  cloud: #更改为阿波罗
 #    config:
 #      profile: @spring.active@
