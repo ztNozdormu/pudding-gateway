@@ -24,7 +24,11 @@
         </root>
 
         <!--各个服务的包在本地执行的时候，打开debug模式-->
+<<<<<<< HEAD
         <logger name="com.mohism" level="debug" additivity="false">
+=======
+        <logger name="cn.stylefeng" level="debug" additivity="false">
+>>>>>>> 53898adac7bf13e1d4a6ec841a16a98f80292fd8
             <appender-ref ref="STDOUT"/>
         </logger>
     </springProfile>

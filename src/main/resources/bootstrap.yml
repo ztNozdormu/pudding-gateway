@@ -2,29 +2,27 @@ spring:
   application:
     name: pudding-gateway
   main:
-    allow-bean-definition-overriding: true
+    allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
   profiles:
-    active: local
+    active: @spring.active@
   cloud:
-      nacos:
-        discovery:
-          serverAddr: 47.107.170.59:8848
-#  cloud:
+    nacos:
+      discovery:
+       server-addr: 47.107.170.59:8848
+#  cloud: #更改为阿波罗
 #    config:
-#      profile: local
+#      profile: @spring.active@
 #      label: master
-
 ---
 
 spring:
   profiles: local
-#  cloud:
-#    config:
-#      enabled: true
-#      uri: http://127.0.0.1:8002
+  cloud:
+    config:
+      enabled: true
+      uri: http://127.0.0.1:8002
 server:
   port: 9091
-
 ---
 
 spring:
@@ -32,7 +30,8 @@ spring:
   cloud:
     config:
       uri: http://127.0.0.1:8002
-
+server:
+  port: 9092
 ---
 
 spring:
@@ -40,7 +39,8 @@ spring:
   cloud:
     config:
       uri: http://127.0.0.1:8002
-
+server:
+  port: 9093
 ---
 
 spring:
@@ -48,3 +48,5 @@ spring:
   cloud:
     config:
       uri: http://127.0.0.1:8002
+server:
+  port: 9094

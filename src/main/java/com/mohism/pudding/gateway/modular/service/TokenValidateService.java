@@ -1,30 +1,14 @@
-/**
- * Copyright 2018-2020 stylefeng & fengshuonan (sn93@qq.com)
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.mohism.pudding.gateway.modular.service;
 
-import com.mohism.pudding.core.util.ToolUtil;
+//import com.mohism.pudding.core.util.ToolUtil;
 import com.mohism.pudding.gateway.core.exception.AuthExceptionEnum;
+import com.mohism.pudding.gateway.core.constants.AuthConstants;
 import com.mohism.pudding.kernel.jwt.properties.JwtProperties;
 import com.mohism.pudding.kernel.model.exception.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.server.ServerWebExchange;
 
 import javax.servlet.http.HttpServletRequest;
-
-import static com.mohism.pudding.gateway.core.constants.AuthConstants.AUTH_HEADER;
 
 /**
  * Token校验的服务
@@ -41,11 +25,13 @@ public abstract class TokenValidateService {
      * @author stylefeng
      * @Date 2018/8/13 22:11
      */
-    public boolean doValidate(ServerWebExchange exchange) {
+    public boolean doValidate(HttpServletRequest request) {
+
         //先获取token
-        String token =  getTokenFromRequest(exchange);
+        String tokenFromRequest = this.getTokenFromRequest(request);
+
         //校验token是否正确
-        return this.validateToken(token, exchange);
+        return this.validateToken(tokenFromRequest, request);
     }
 
     /**
@@ -54,12 +40,20 @@ public abstract class TokenValidateService {
      * @author stylefeng
      * @Date 2018/8/13 22:05
      */
-    private String getTokenFromRequest(ServerWebExchange exchange) {
+    private String getTokenFromRequest(HttpServletRequest request) {
         //获取token
-        String authToken = exchange.getRequest().getQueryParams().getFirst("token");
-        if (ToolUtil.isEmpty(authToken)) {
-            throw new ServiceException(AuthExceptionEnum.TOKEN_EMPTY);
-        }
+        String authToken = request.getHeader(AuthConstants.AUTH_HEADER);
+//        if (ToolUtil.isEmpty(authToken)) {
+//
+//            //如果header中没有token，则检查请求参数中是否带token
+//            authToken = request.getParameter("token");
+//            if (ToolUtil.isEmpty(authToken)) {
+//                throw new ServiceException(AuthExceptionEnum.TOKEN_EMPTY);
+//            }
+//        } else {
+//            authToken = authToken.substring("Bearer ".length());
+//        }
+
         return authToken;
     }
 
@@ -69,6 +63,6 @@ public abstract class TokenValidateService {
      * @author stylefeng
      * @Date 2018/8/13 21:50
      */
-    protected abstract boolean validateToken(String token, ServerWebExchange exchange);
+    protected abstract boolean validateToken(String token, HttpServletRequest request);
 
 }

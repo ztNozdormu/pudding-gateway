@@ -3,8 +3,8 @@ package com.mohism.pudding.gateway.core.constants;
 /**
  * 网关的常量
  *
- * @author fengshuonan
- * @date 2018-05-09-下午3:38
+ * @author real earth
+ * @date 2019-05-22-早上10:04
  */
 public interface GwFiltersOrder {
 

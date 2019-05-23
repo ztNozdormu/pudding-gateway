@@ -8,7 +8,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 /**
  * 网关服务
  *
- * @author noz
+ * @author real earth
+ * ,WebAutoConfiguration.class
  * @Date 2017/11/10 上午11:24
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})

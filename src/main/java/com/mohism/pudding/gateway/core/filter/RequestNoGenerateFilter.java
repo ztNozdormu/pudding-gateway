@@ -1,63 +1,34 @@
-/**
- * Copyright 2018-2020 stylefeng & fengshuonan (sn93@qq.com)
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.mohism.pudding.gateway.core.filter;
 
+//import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.mohism.pudding.gateway.core.constants.GwFiltersOrder;
-import com.mohism.pudding.kernel.model.constants.RosesConstants;
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
-import com.netflix.zuul.ZuulFilter;
-import com.netflix.zuul.context.RequestContext;
+import com.mohism.pudding.kernel.model.constants.PuddingConstants;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
+import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.core.Ordered;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
 
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * requestNo生成过滤器
+ * 权限校验的过滤器---全局过滤器
  *
- * @author fengshuonan
+ * @author real earth
  * @date 2017-11-08-下午2:49
  */
-public class RequestNoGenerateFilter extends GatewayFilter {
+public class RequestNoGenerateFilter implements  GatewayFilter,Ordered {
 
     @Override
-    public String filterType() {
-        return "pre";
-    }
-
-    @Override
-    public int filterOrder() {
+    public int getOrder() {
         return GwFiltersOrder.REQUEST_NO_GENERATE_FILTER_ORDER;
     }
-
     @Override
-    public boolean shouldFilter() {
-        return true;
-    }
-
-    @Override
-    public Object run() {
-        RequestContext currentContext = RequestContext.getCurrentContext();
-        HttpServletResponse response = currentContext.getResponse();
-
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        HttpServletResponse response = (HttpServletResponse)exchange.getResponse();
         //生成唯一请求号uuid
-        String requestNo = IdWorker.getIdStr();
-        currentContext.set(RosesConstants.REQUEST_NO_HEADER_NAME, requestNo);
-        currentContext.addZuulRequestHeader(RosesConstants.REQUEST_NO_HEADER_NAME, requestNo);
-        response.addHeader(RosesConstants.REQUEST_NO_HEADER_NAME, requestNo);
-
-        return null;
+        String requestNo = "";//IdWorker.getIdStr();
+        response.addHeader(PuddingConstants.REQUEST_NO_HEADER_NAME, requestNo);
+        return chain.filter(exchange);
     }
 }
