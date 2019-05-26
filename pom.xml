@@ -24,6 +24,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kernel.version>0.0.1</kernel.version>
         <spring-cloud-alibaba.version>0.9.0.RELEASE</spring-cloud-alibaba.version>
+        <mp.springboot.version>3.1.0</mp.springboot.version>
     </properties>
 
     <dependencyManagement>
@@ -72,12 +73,6 @@
             <groupId>com.mohism.pudding</groupId>
             <artifactId>kernel-logger</artifactId>
             <version>${kernel.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.mohism.pudding</groupId>
-                    <artifactId>kernel-core</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.mohism.pudding</groupId>
@@ -93,10 +88,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+
         <!-- nacos 的服务注册与发现 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -107,21 +99,32 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>com.mohism.pudding</groupId>-->
-<!--            <artifactId>kernel-actuator</artifactId>-->
-<!--            <version>${kernel.version}</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.mohism.pudding</groupId>-->
+        <!--            <artifactId>kernel-actuator</artifactId>-->
+        <!--            <version>${kernel.version}</version>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <scope>provided</scope>
+            <version>${mp.springboot.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+        <!--动态路由接口-->
+        <dependency>
+            <groupId>com.mohism.pudding</groupId>
+            <artifactId>base-route-interface</artifactId>
+            <version>${kernel.version}</version>
         </dependency>
     </dependencies>
 

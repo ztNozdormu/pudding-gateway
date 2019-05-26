@@ -1,6 +1,6 @@
 package com.mohism.pudding.gateway.core.filter;
 
-//import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.mohism.pudding.gateway.core.constants.GwFiltersOrder;
 import com.mohism.pudding.kernel.model.constants.PuddingConstants;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -27,7 +27,7 @@ public class RequestNoGenerateFilter implements  GatewayFilter,Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         HttpServletResponse response = (HttpServletResponse)exchange.getResponse();
         //生成唯一请求号uuid
-        String requestNo = "";//IdWorker.getIdStr();
+        String requestNo = IdWorker.getIdStr();
         response.addHeader(PuddingConstants.REQUEST_NO_HEADER_NAME, requestNo);
         return chain.filter(exchange);
     }

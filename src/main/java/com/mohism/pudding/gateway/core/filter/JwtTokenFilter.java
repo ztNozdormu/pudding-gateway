@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
+import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author real earth
  * @date 2017-11-08-下午2:49
  */
+@Component
 public class JwtTokenFilter implements GlobalFilter, Ordered {
 
    private  static Logger logger = LoggerFactory.getLogger(JwtTokenFilter.class);

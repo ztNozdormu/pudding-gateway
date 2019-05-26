@@ -1,4 +1,4 @@
-package com.mohism.pudding.gateway.core.exception.handler;
+package com.mohism.pudding.gateway.core.handler.exception;
 
 import java.util.HashMap;
 import java.util.Map;

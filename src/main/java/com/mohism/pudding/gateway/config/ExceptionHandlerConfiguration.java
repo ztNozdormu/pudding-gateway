@@ -1,6 +1,6 @@
 package com.mohism.pudding.gateway.config;
 
-import com.mohism.pudding.gateway.core.exception.handler.JsonExceptionHandler;
+import com.mohism.pudding.gateway.core.handler.exception.JsonExceptionHandler;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties;

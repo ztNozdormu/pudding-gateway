@@ -4,14 +4,27 @@ spring:
   main:
     allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
   profiles:
-    active: @spring.active@
+    active: local
   cloud:
     nacos:
       discovery:
        server-addr: 47.107.170.59:8848
+spring:
+  cloud:
+    gateway:
+      routes:
+      -id: pudding-system
+       uri: lb://pudding-system
+       predicates: -Path=/log/**
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+pudding:
+  log:
+    kafka: true
 #  cloud: #更改为阿波罗
 #    config:
-#      profile: @spring.active@
+#      profile: @spring.active@   /;..........................................................
 #      label: master
 ---
 
