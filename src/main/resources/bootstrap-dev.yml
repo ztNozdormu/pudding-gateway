@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+       server-addr: 47.107.170.59:8848
+# ribbon负载均衡
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+#  开发服务端口
+server:
+  port: 9094
+#  阿波罗配置
+app:
+  id: pudding-gateway
+apollo:
+  meta: http://47.107.170.59:8849

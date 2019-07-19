@@ -1,5 +1,6 @@
 package com.mohism.pudding.gateway;
 
+import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -13,6 +14,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * WebAutoConfiguration.class
  * @Date 2019/05/23 上午11:24
  */
+@EnableApolloConfig
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableFeignClients(basePackages = "com.mohism.pudding.gateway.modular.consumer")
 @EnableDiscoveryClient

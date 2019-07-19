@@ -25,6 +25,8 @@
         <kernel.version>0.0.1</kernel.version>
         <spring-cloud-alibaba.version>0.9.0.RELEASE</spring-cloud-alibaba.version>
         <mp.springboot.version>3.1.0</mp.springboot.version>
+        <platform.bom.version>Cairo-SR2</platform.bom.version>
+        <apollo.version>1.4.0</apollo.version>
     </properties>
 
     <dependencyManagement>
@@ -47,6 +49,14 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- 解决jar冲突 -->
+        <dependency>
+            <groupId>io.spring.platform</groupId>
+            <artifactId>platform-bom</artifactId>
+            <version>${platform.bom.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -74,10 +84,10 @@
             <version>${kernel.version}</version>
         </dependency>
         <!--  Spring Cloud Gateway 是使用 netty+webflux 实现因此不需要再引入 web 模块-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-webflux</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
@@ -113,6 +123,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+        <!-- apollo -->
+        <dependency>
+            <groupId>com.ctrip.framework.apollo</groupId>
+            <artifactId>apollo-client</artifactId>
+            <version>${apollo.version}</version>
         </dependency>
     </dependencies>
 
