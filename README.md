@@ -27,7 +27,6 @@ JwtTokenFilter，jwt鉴权过滤器，其中登陆接口AuthConstants.AUTH_ACTIO
 PathMatchFilter，资源权限校验过滤器，pudding通过@ApiResource来搜集所有微服务中的资源，网关通过调用pudding-system提供的用户权限数据，来确定当前用户是否有权限访问当前访问接口
 RequestNoGenerateFilter，请求唯一号生成器，每次经过网关的请求，不管后续经过多少个微服务都会生成这样一个唯一请求号，用来日志追踪和异常排查
 控制器接口介绍：
-<<<<<<< HEAD
 > 1. /gatewayAction/auth接口，相当于登陆接口，传递账号密码返回用户token，然后访问别的接口就带着这个token访问即可
 > 2. /gatewayAction/validateToken接口，相当于单点登陆SSO接口，多个内部系统之间，通过此接口来确定当前登陆用户（携带的token）是否正确
 > 3. /gatewayAction/logout接口，退出接口，服务器清除掉登陆记录缓存
@@ -86,3 +85,31 @@ public class PuddingFeignHeaderProcessInterceptor implements RequestInterceptor 
     
     }
 }
+
+# 动态路由实现
+### 一. Spring Cloud Gateway动态路由实现思路
+
+首先实现ApplicationContextAware和ApplicationEventPublisherAware两个接口，然后通过ApolloConfigChangeListener注解监听spring.cloud.gateway命名空间的配置更新事件，若该事件发生，则调用onChange方法，刷新变动的bean实例和路由信息。
+
+
+
+### 二. apollo信息配置
+
+- server.port：网关应用端口
+
+- spring.cloud.gateway.routes[0].id：路由id
+
+- spring.cloud.gateway.routes[0].uri：将请求路由到哪里
+
+- spring.cloud.gateway.routes[0].predicates[0]：进行判断当前路由是否满足给定条件
+
+- spring.cloud.gateway.discovery.locator.enabled：是否与服务发现组件进行结合
+
+  
+
+### 三. 案例总结
+
+- platform-bom解决jar冲突，apollo-client：引入apollo客户端依赖。
+- ApolloConfigChangeListener：监听指定命名空间的配置更新事件
+- applicationContext.publishEvent：更新变动配置的值以及相应的bean的属性值，主要是存在@ConfigurationProperties注解的bean(默认情况下@ConfigurationProperties注解标注的配置类是不会实时更新的)
+- publisher.publishEvent(new RefreshRoutesEvent(this))：路由动态刷新
