@@ -1,8 +1,8 @@
 package com.mohism.pudding.gateway.modular.controller;
 
-import com.mohism.pudding.core.reqres.response.ResponseData;
 import com.mohism.pudding.gateway.core.constants.AuthConstants;
 import com.mohism.pudding.gateway.modular.consumer.AuthServiceConsumer;
+import com.mohism.pudding.kernel.model.reqres.response.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

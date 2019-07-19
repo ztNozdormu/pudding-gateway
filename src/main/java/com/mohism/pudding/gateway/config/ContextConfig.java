@@ -61,6 +61,7 @@ public class ContextConfig {
 //                    ServiceException serviceException = (ServiceException) cause;
 //                    return BeanUtil.beanToMap(new ErrorResponseData(serviceException.getCode(), serviceException.getMessage(), null));
 //                }
+
 ////            }
 //
 //            return BeanUtil.beanToMap(new ErrorResponseData(CoreExceptionEnum.SERVICE_ERROR.getCode(), CoreExceptionEnum.SERVICE_ERROR.getMessage(), null));

@@ -72,6 +72,12 @@
             <groupId>com.mohism.pudding</groupId>
             <artifactId>kernel-jwt</artifactId>
             <version>${kernel.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.mohism.pudding</groupId>
+                    <artifactId>kernel-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.mohism.pudding</groupId>
@@ -103,11 +109,11 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>com.mohism.pudding</groupId>-->
-<!--            <artifactId>kernel-actuator</artifactId>-->
-<!--            <version>${kernel.version}</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.mohism.pudding</groupId>-->
+        <!--            <artifactId>kernel-actuator</artifactId>-->
+        <!--            <version>${kernel.version}</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus</artifactId>

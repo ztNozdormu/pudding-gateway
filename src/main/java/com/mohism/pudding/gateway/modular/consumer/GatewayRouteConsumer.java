@@ -1,16 +1,16 @@
 package com.mohism.pudding.gateway.modular.consumer;
 
-import com.mohism.pudding.kernel.model.api.AuthService;
+import com.mohism.pudding.base.route.api.GatewayRouteApi;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
 
 /**
- * 鉴权服务的消费者
+ * 路由版本消费者
  *
- * @author fengshuonan
+ * @author real earth
  */
 @FeignClient("pudding-system")
 @Service
-public interface AuthServiceConsumer extends AuthService {
+public interface GatewayRouteConsumer extends GatewayRouteApi {
 
 }

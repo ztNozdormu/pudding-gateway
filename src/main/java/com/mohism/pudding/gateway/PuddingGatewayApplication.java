@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * 网关服务
@@ -15,9 +16,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @Date 2019/05/23 上午11:24
  */
 @EnableApolloConfig
+@EnableScheduling
+@EnableDiscoveryClient
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableFeignClients(basePackages = "com.mohism.pudding.gateway.modular.consumer")
-@EnableDiscoveryClient
 public class PuddingGatewayApplication {
 
     public static void main(String[] args) {

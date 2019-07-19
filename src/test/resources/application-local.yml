@@ -52,7 +52,11 @@ feign:
         readTimeout: 3000    #处理请求的超时时间 单位：毫秒
         errorDecoder: cn.stylefeng.roses.core.feign.RosesFeignErrorDecoder
         requestInterceptors:
+<<<<<<< HEAD
+        - cn.stylefeng.roses.gateway.core.feign.ZuulFeignHeaderProcessInterceptor
+=======
         - ZuulFeignHeaderProcessInterceptor
+>>>>>>> 53898adac7bf13e1d4a6ec841a16a98f80292fd8
 
 hystrix:
   command:

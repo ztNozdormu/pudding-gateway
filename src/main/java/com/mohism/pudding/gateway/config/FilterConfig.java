@@ -28,6 +28,7 @@ public class FilterConfig {
      */
     @Bean
     public PathMatchFilter pathMatchFilter() {
+
         System.out.println("65556");
         return new PathMatchFilter();
     }
